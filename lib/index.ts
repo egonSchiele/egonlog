@@ -9,12 +9,16 @@ const LOG_LEVELS: Record<LogLevel, number> = {
   debug: 3,
 };
 
-export class Logger {
+export type EgonLogConfig = {
+  level: LogLevel;
+};
+
+export class EgonLog {
   private level: LogLevel;
   private timers: Record<string, number> = {};
 
-  constructor(level: LogLevel) {
-    this.level = level;
+  constructor(config: EgonLogConfig) {
+    this.level = config.level;
   }
 
   private shouldLog(messageLevel: LogLevel): boolean {
