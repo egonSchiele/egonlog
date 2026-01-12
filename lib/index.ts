@@ -10,19 +10,19 @@ const LOG_LEVELS: Record<LogLevel, number> = {
 };
 
 export type EgonLogConfig = {
-  level: LogLevel;
+  logLevel: LogLevel;
 };
 
 export class EgonLog {
-  private level: LogLevel;
+  private logLevel: LogLevel;
   private timers: Record<string, number> = {};
 
   constructor(config: EgonLogConfig) {
-    this.level = config.level;
+    this.logLevel = config.logLevel;
   }
 
   private shouldLog(messageLevel: LogLevel): boolean {
-    return LOG_LEVELS[messageLevel] <= LOG_LEVELS[this.level];
+    return LOG_LEVELS[messageLevel] <= LOG_LEVELS[this.logLevel];
   }
 
   private log(level: LogLevel, ...args: unknown[]): void {
@@ -82,12 +82,12 @@ export class EgonLog {
     console.log(...highlighted);
   }
 
-  setLevel(level: LogLevel): void {
-    this.level = level;
+  setLogLevel(level: LogLevel): void {
+    this.logLevel = level;
   }
 
-  getLevel(): LogLevel {
-    return this.level;
+  getLogLevel(): LogLevel {
+    return this.logLevel;
   }
 
   startTimer(label: string): void {
